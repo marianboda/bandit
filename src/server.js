@@ -1,6 +1,6 @@
 import express from 'express'
 import fetch from 'node-fetch'
-import { parseInfo } from './services/Bandcamp.js'
+import { parseInfo, parseData } from './services/Bandcamp.js'
 
 const app = express()
 const port = 5000
@@ -15,5 +15,10 @@ app.post('/albumInfo', async (req, res) => {
     const response = await fetch(url);
     const result = await response.text();
 
-    res.send(parseInfo(result))
+    const albumShortInfo = parseInfo(result)
+    const albumData = parseData(result)
+
+    const album = { ...albumShortInfo, data: albumData };
+
+    res.send(album)
 })
