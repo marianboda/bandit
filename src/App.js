@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, SearchInput } from 'evergreen-ui';
+import { Button, TextInput } from 'evergreen-ui';
 import './App.css';
 
 function AlbumInfo({ data }) {
@@ -18,8 +18,9 @@ function AlbumInfo({ data }) {
 function App() {
   const [url, setUrl] = useState('');
   const [albumInfo, setAlbumInfo] = useState(null);
+  const [albums, setAlbums] = useState([]);
 
-  const handleGet = () => {
+  const handleAdd = () => {
     fetch('http://localhost:3000/albumInfo', {
       method: 'POST',
       headers: {
@@ -43,6 +44,11 @@ function App() {
     })
   }
 
+  const handleGet = async () => {
+    const albums = await fetch('/albums').then(r => r.json());
+    setAlbums(albums);
+  }
+
   const handleUrlChange = (e) => setUrl(e.target.value)
 
   return (
@@ -51,9 +57,11 @@ function App() {
         Bandit
       </header>
       <div className="App-content">
-        <SearchInput placeholder="enter album url" value={url} onChange={handleUrlChange} />
-        <Button onClick={handleGet}>GET</Button>
+        <TextInput placeholder="enter album url" value={url} onChange={handleUrlChange} />
+        <Button onClick={handleAdd}>ADD</Button>
         <AlbumInfo data={albumInfo} />
+        <Button onClick={handleGet}>GET</Button>
+        { albums.map(i => <div>{i.artist} - {i.title}</div>) }
       </div>
     </div>
   );

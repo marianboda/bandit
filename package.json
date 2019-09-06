@@ -8,13 +8,15 @@
     "node-fetch": "^2.6.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "3.1.1"
+    "react-scripts": "3.1.1",
+    "sqlite3": "^4.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "initdb": "mkdir -p data; rm -f data/db.sqlite; sqlite3 data/db.sqlite < ./scripts/schema.sql",
     "serve": "nodemon --experimental-modules src/server.js"
   },
   "eslintConfig": {
