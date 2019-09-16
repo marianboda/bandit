@@ -6,10 +6,30 @@
 .App-header {
   background-color: #1a2932;
   display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
+  flex-direction: row;
+  align-items: baseline;
   color: white;
   padding: 16px;
+}
+
+.App-header h1 {
+  margin: 0;
+}
+
+.App-header ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.App-header li {
+  display: inline;
+  margin-left: 16px;
+}
+
+.App-header a {
+  color: #FF9966;
+  text-decoration: none;
 }
 
 .App-content {
