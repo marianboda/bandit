@@ -35,7 +35,8 @@ const parseJSObject = function(body, name) {
   let regex = new RegExp('var ' + name + ' = ({(.|\\s)*?)};','gmi')
   let match = regex.exec(body)
   let res = match[0]
-    .replace(/\/\/ .*\n/g, '')
+    .replace(/^\s*\/\/ .*\n/gm, '')
+    .replace(/,\s\/\/ .*\n/gm, ',')
     .replace('var ' + name + ' = ', '')
     .replace(/^\s+([a-z_A-Z]+)\s?:/gm, '"$1":')
     .replace('" + "', '')
